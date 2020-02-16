@@ -1,7 +1,9 @@
 let express = require("express");
+let dte = require("dotenv");
 let app = express();
 
 // sets port 8080 to default or unless otherwise specified in the environment
+dte.config();
 app.set('port', process.env.PORT || 8080);
 
 app.get('/', function(req, res){
