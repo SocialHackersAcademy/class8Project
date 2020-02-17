@@ -1,19 +1,23 @@
 {
-  "name": "class8project",
+  "name": "class8Project",
   "version": "1.0.0",
-  "description": "team project",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SocialHackersCodeSchool/class8Project.git"
   },
-  "author": "NajeemB",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SocialHackersCodeSchool/class8Project/issues"
   },
-  "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme"
+  "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme",
+  "dependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
