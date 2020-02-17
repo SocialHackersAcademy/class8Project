@@ -19,6 +19,7 @@
   "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.9.1",
     "nodemon": "^2.0.2"
   }
 }
