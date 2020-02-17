@@ -3,7 +3,7 @@ const app = express();
 
 // Middleware
 
-app.use(require("./Routes/post-routes"));
+app.use(require("./routes/post-routes"));
 
 
 // PORT
