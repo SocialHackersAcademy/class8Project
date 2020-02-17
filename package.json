@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/SocialHackersCodeSchool/class8Project/issues"
   },
-  "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme"
+  "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
 }
