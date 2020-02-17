@@ -54,7 +54,7 @@ const OrganizationSchema = new mongoose.Schema({
   ],
   posts: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "" // Here will go the Post Model Which isn't ready yet
+    ref: "Post" // Added the post model right here
   }
 });
 
