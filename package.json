@@ -18,12 +18,9 @@
   },
   "homepage": "https://github.com/SocialHackersCodeSchool/class8Project#readme",
   "dependencies": {
-<<<<<<< HEAD
-    "dotenv": "^8.2.0"
-=======
+    "bcrypt": "^4.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.1",
     "nodemon": "^2.0.2"
->>>>>>> 435f27fefbae2bc2aa3c3a35acb4bef06fdfcdd2
   }
 }
