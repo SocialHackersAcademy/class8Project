@@ -25,8 +25,15 @@ const postSchema = new Schema(
           type: String
         }
       }
-    ]
+    ],
+    owner:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'organization'
+    }
   },
+  {
+    timestamps:true
+  }
 );
 ​
 const Post = mongoose.model("Post", postSchema)
