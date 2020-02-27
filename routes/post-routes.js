@@ -3,7 +3,6 @@ const router = express.Router();
 const Post = require("../models/PostModel");
 const passport = require("passport");
 
-
 // Get all the posts made by a specific user
 
 router.get(
@@ -42,6 +41,7 @@ router.get("/test", (req, res) => {
 router.get("/posts", async (req, res) => {
   try {
     const allPosts = await Post.find({});
+    res.send(allPosts);
   } catch (e) {
     res.status(500).send();
   }
