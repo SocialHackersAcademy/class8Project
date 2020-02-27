@@ -3,9 +3,6 @@ const router = express.Router();
 const Post = require("../models/PostModel");
 const passport = require("passport");
 
-router.get("/user", (req, res) => {
-  res.send("Healwejfoiawejf");
-});
 
 // Get all the posts made by a specific user
 
