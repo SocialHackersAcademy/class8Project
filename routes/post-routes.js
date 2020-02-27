@@ -22,8 +22,6 @@ router.get(
   }
 );
 
-<<<<<<< HEAD
-=======
 // Get all the posts made by a specific user
 
 router.get(
@@ -39,5 +37,4 @@ router.get(
   }
 );
 
->>>>>>> 05e8329b0cd9bba2ba2b61b93aec3bdd32691cb5
 module.exports = router;
