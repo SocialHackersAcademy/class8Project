@@ -1,6 +1,62 @@
 const express = require("express");
 const router = express.Router();
 
+// Creating a ngo
+router.post("/ngo", async (req, res) => {
+  const {
+    logo,
+    name,
+    email,
+    password,
+    phone,
+    year,
+    industry,
+    keyword,
+    services,
+    description,
+    teammember
+  } = req.body;
+  let user = {
+    logo,
+    name,
+    email,
+    password,
+    phone,
+    year,
+    industry,
+    keyword,
+    services,
+    description,
+    teammember
+  };
+  try {
+    const newUser = new User(user);
+    const hash = await bcrypt.hash(newUser.password, 8);
+    newUser.password = hash;
+    await newUser.save();
+    res.json({ newUser });
+  } catch (e) {
+    res.status(400).send();
+  }
+});
+
+// Get all the ngo list
+router.get(
+  "/user/me",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    res.send(req.user);
+  }
+);
+// get the current ngo
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({ organization: req.user });
+  }
+);
+
 // Updating an ngo
 router.put(
   "/ngo",
