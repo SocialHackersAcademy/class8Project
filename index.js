@@ -1,8 +1,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> FIxed issues
+=======
+>>>>>>> 05e8329b0cd9bba2ba2b61b93aec3bdd32691cb5
 let express = require("express");
 let app = express();
 
@@ -10,9 +13,12 @@ let app = express();
 app.set("port", process.env.PORT || 8080);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> FIxed issues
 =======
 >>>>>>> FIxed issues
+=======
+>>>>>>> 05e8329b0cd9bba2ba2b61b93aec3bdd32691cb5
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
