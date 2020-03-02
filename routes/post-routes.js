@@ -4,7 +4,6 @@ const Post = require("../models/PostModel");
 const passport = require("passport");
 
 // Get all the posts made by a specific user
-
 router.get(
   "/posts/me",
   passport.authenticate("jwt", { session: false }),
@@ -29,7 +28,6 @@ router.get("/posts", async (req, res) => {
 });
 
 // Create a new post
-
 router.post(
   "/posts",
   passport.authenticate("jwt", { session: false }),
@@ -52,8 +50,8 @@ router.post(
     }
   }
 );
-// Get a single post by its id
 
+// Get a single post by its id01
 router.get(
   "/posts/:id",
   passport.authenticate("jwt", { session: false }),
