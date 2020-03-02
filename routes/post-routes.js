@@ -45,11 +45,31 @@ router.post(
     };
     try {
       const Posts = new Post(newPost);
+      await Posts.save();
       res.send(Posts);
     } catch (e) {
       res.status(400).send();
     }
   }
 );
+
+// Delete a post by its id
+router.delete(
+  "/posts/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const removedPosts = await Post.findOneAndRemove({
+        owner: req.user._id,
+        _id: req.params.id
+      });
+      !removedPosts && res.send(404).send();
+      res.json({ success: true });
+    } catch (e) {
+      res.status(400).send();
+    }
+  }
+);
+//
 
 module.exports = router;
