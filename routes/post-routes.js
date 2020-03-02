@@ -85,6 +85,26 @@ router.delete(
     }
   }
 );
-//
+
+// Update a post by its id
+
+router.update(
+  "posts/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const posts = await Post.findOneAndUpdate(
+        {
+          owner: req.user._id,
+          _id: req.params.id
+        },
+        req.body
+      );
+      res.send(posts);
+    } catch (e) {
+      res.status(400).send();
+    }
+  }
+);
 
 module.exports = router;
