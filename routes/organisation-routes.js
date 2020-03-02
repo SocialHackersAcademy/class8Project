@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Organization = require("../models/OrganizationModel");
 
 // Creating a ngo
 router.post("/ngo", async (req, res) => {
@@ -30,24 +31,28 @@ router.post("/ngo", async (req, res) => {
     teammember
   };
   try {
-    const newUser = new User(user);
-    const hash = await bcrypt.hash(newUser.password, 8);
-    newUser.password = hash;
-    await newUser.save();
-    res.json({ newUser });
+    const newOrganization = new Organization(user);
+    const hash = await bcrypt.hash(newOrganization.password, 8);
+    newOrganization.password = hash;
+    await newOrganization.save();
+    res.json({ newOrganization });
   } catch (e) {
     res.status(400).send();
   }
 });
 
 // Get all the ngo list
-router.get(
-  "/user/me",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    res.send(req.user);
+
+router.get("/ngo", async (req, res) => {
+  try {
+    const ngos = await Organization.find({}); // Gets all the ngos
+    !ngos && res.status(500).send(); // && means if true
+    res.send(ngos);
+  } catch (e) {
+    res.status(500).send();
   }
-);
+});
+
 // get the current ngo
 router.get(
   "/current",
