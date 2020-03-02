@@ -61,6 +61,15 @@ router.get(
     res.json({ organization: req.user });
   }
 );
+// Get ngo by its id
+router.get("/ngo/:id", async (req, res) => {
+  try {
+    const ngo = await Organization.findById(req.params.id);
+    res.send(ngo);
+  } catch (e) {
+    res.status(400).send();
+  }
+});
 
 // Updating an ngo
 router.put(
