@@ -16,17 +16,16 @@ mongoose.connect(
 );
 
 // Body parser middleware
-app.use(bodyParser.initialize());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Passport Middleware
 app.use(passport.initialize());
-require("./configuration/passport.js");
+require("./configuration/passport.js")(passport);
 
 // Importing The Routes
 app.use(require("./routes/post-routes"));
 app.use(require("./routes/organisation-routes"));
-
 
 // PORT
 app.listen(process.env.PORT || 4000, () => {
