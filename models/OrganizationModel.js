@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const OrganizationSchema = new mongoose.Schema({
   logo: {
@@ -45,11 +46,20 @@ const OrganizationSchema = new mongoose.Schema({
   },
   teammembers: [
     {
-      type: String,
-      avatar: String,
-      bio: String,
-      title: String,
-      required: true
+      name: {
+        type: String,
+        required: true
+      },
+      avatar: {
+        type: String
+      },
+      bio: {
+        type: String
+      },
+      title: {
+        type: String,
+        required: true
+      }
     }
   ],
   posts: {
@@ -57,6 +67,14 @@ const OrganizationSchema = new mongoose.Schema({
     ref: "Post" // Added the post model right here
   }
 });
+
+OrganizationSchema.pre("save", async function(next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 8);
+  }
+  next();
+});
+
 
 const Organization = mongoose.model("organization", OrganizationSchema);
 module.exports = Organization;

@@ -3,7 +3,8 @@ const router = express.Router();
 const Post = require("../models/PostModel");
 const passport = require("passport");
 
-// Get all the posts made by a specific user
+// Get all the posts made by a specific user check
+
 router.get(
   "/posts/me",
   passport.authenticate("jwt", { session: false }),
@@ -17,7 +18,8 @@ router.get(
   }
 );
 
-// Get all the posts from the Database
+
+// Get all the posts from the Database check
 router.get("/posts", async (req, res) => {
   try {
     const allPosts = await Post.find({});
@@ -27,7 +29,7 @@ router.get("/posts", async (req, res) => {
   }
 });
 
-// Create a new post
+// Create a new post check
 router.post(
   "/posts",
   passport.authenticate("jwt", { session: false }),
@@ -51,22 +53,23 @@ router.post(
   }
 );
 
-// Get a single post by its id01
+// Get a single post by its id check
 router.get(
   "/posts/:id",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const _id = req.params.id;
     try {
-      const post = await Posts.findOne({ owner: req.user._id, _id });
+      const post = await Post.findOne({ owner: req.user._id, _id });
       !post && res.status(404).send();
+      res.send(post);
     } catch (e) {
       res.status(400).send();
     }
   }
 );
 
-// Delete a post by its id
+// Delete a post by its id check
 router.delete(
   "/posts/:id",
   passport.authenticate("jwt", { session: false }),
@@ -84,10 +87,10 @@ router.delete(
   }
 );
 
-// Update a post by its id
+// Update a post by its id check
 
-router.update(
-  "posts/:id",
+router.put(
+  "/posts/:id",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
@@ -96,7 +99,8 @@ router.update(
           owner: req.user._id,
           _id: req.params.id
         },
-        req.body
+        req.body,
+        { new: true }
       );
       res.send(posts);
     } catch (e) {
