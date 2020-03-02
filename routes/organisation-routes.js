@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const Organization = require("../models/OrganizationModel");
+const passport = require("passport");
 
 // Creating a ngo
+
 router.post("/ngo", async (req, res) => {
   const {
     logo,
@@ -72,6 +74,7 @@ router.get("/ngo/:id", async (req, res) => {
 });
 
 // Updating an ngo
+
 router.put(
   "/ngo",
   passport.authenticate("jwt", { session: false }),
@@ -85,6 +88,7 @@ router.put(
     }
   }
 );
+
 // Delete an ngo
 
 router.delete(

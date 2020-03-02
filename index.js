@@ -1,13 +1,8 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
-const passport = require('passport')
-
-// Middleware
-
-app.use(require("./routes/post-routes"));
+const passport = require("passport");
 
 // setting up the database
 
@@ -21,13 +16,16 @@ mongoose.connect(
 );
 
 // Body parser middleware
-app.use(bodyParser.initalize());
-app.use(bodyParser.urlencoded({ extended:false }));
+app.use(bodyParser.initialize());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //Passport Middleware
-app.use(passport.initialize())
-//Passport Config
-require('./configuration/passport.js')
+app.use(passport.initialize());
+require("./configuration/passport.js");
+
+// Importing The Routes
+app.use(require("./routes/post-routes"));
+app.use(require("./routes/organisation-routes"));
 
 
 // PORT
