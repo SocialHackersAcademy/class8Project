@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const passport = require('passport')
 
 // Middleware
 
@@ -17,6 +18,11 @@ mongoose.connect(
   },
   () => console.log("Connected to mongo db")
 );
+//Passport Middleware
+app.use(passport.initialize())
+//Passport Config
+require('./configuration/passport.js')
+
 
 // PORT
 app.listen(process.env.PORT || 4000, () => {
