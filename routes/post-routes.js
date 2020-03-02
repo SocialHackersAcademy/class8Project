@@ -52,6 +52,21 @@ router.post(
     }
   }
 );
+// Get a single post by its id
+
+router.get(
+  "/posts/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const _id = req.params.id;
+    try {
+      const post = await Posts.findOne({ owner: req.user._id, _id });
+      !post && res.status(404).send();
+    } catch (e) {
+      res.status(400).send();
+    }
+  }
+);
 
 // Delete a post by its id
 router.delete(
