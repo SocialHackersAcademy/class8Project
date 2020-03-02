@@ -28,5 +28,28 @@ router.get("/posts", async (req, res) => {
   }
 });
 
+// Create a new post
+
+router.post(
+  "/posts",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const { subject, img, contact, text_post, comments } = req.body;
+    const newPost = {
+      subject,
+      img,
+      contact,
+      text_post,
+      comments,
+      owner: req.user._id
+    };
+    try {
+      const Posts = new Post(newPost);
+      res.send(Posts);
+    } catch (e) {
+      res.status(400).send();
+    }
+  }
+);
 
 module.exports = router;
