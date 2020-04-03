@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const app = express();
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const cors  = require('cors');
+
+app.use(cors());
 
 // setting up the database
 
