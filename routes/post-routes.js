@@ -4,14 +4,21 @@ const Post = require("../models/PostModel");
 const passport = require("passport");
 
 // Get all the posts made by a specific user check
-
+// and populating it with the organization logo and the name
 router.get(
   "/posts/me",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-      const posts = await Post.find({ owner: req.user._id });
-      res.send(posts);
+      const ngo_posts = await Post.find({ owner: req.user._id })
+                                  .populate('logo')
+                                  .populate('name')
+                                  .exec(function (err, story) {
+                                                  if (err)
+                                                      return handleError(err);
+                                                  console.log('The author is %s', story.author.name);
+                                   });
+      res.send(ngo_posts);
     } catch (e) {
       res.status(500).send();
     }
