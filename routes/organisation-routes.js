@@ -44,7 +44,7 @@ router.post("/ngo", async (req, res) => {
     ngo && res.json({ err: "Already Exists" });
     const newOrganization = new Organization(user);
     await newOrganization.save();
-    res.json({ newOrganization });
+    res.json({ newOrganization, success: true });
   } catch (e) {
     j;
     res.status(400).send(e);
