@@ -32,5 +32,5 @@ app.use(require("./routes/organisation-routes"));
 
 // PORT
 app.listen(process.env.PORT || 4000, () => {
-  console.log("Connected to port ");
+  console.log("Connected to port 4000");
 });

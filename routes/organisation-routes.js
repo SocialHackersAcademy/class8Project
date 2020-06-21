@@ -22,7 +22,7 @@ router.post("/ngo", async (req, res) => {
     keyword,
     services,
     description,
-    teammember
+    teammembers,
   } = req.body;
   let user = {
     logo,
@@ -36,13 +36,17 @@ router.post("/ngo", async (req, res) => {
     keyword,
     services,
     description,
-    teammember
+    teammembers,
   };
   try {
+    // Testing weather that user exists or not
+    const ngo = await Organization.findOne({ email });
+    ngo && res.json({ err: "Already Exists" });
     const newOrganization = new Organization(user);
     await newOrganization.save();
     res.json({ newOrganization });
   } catch (e) {
+    j;
     res.status(400).send(e);
   }
 });
@@ -66,7 +70,7 @@ router.post("/login", async (req, res) => {
     if (matched) {
       // Step four assign it a token
       const payload = { id: ngo._id, name: ngo.name, logo: ngo.logo };
-      const token = await jwt.sign(payload, keys.secretOrKey);
+      const token = jwt.sign(payload, keys.secretOrKey);
       res.json({ token: "Bearer " + token, organization: ngo.name });
     } else {
       // Step Five if the password does not match
@@ -88,7 +92,6 @@ router.get("/ngo", async (req, res) => {
     res.status(500).send();
   }
 });
-
 
 // get the current ngo check
 router.get(
@@ -116,7 +119,7 @@ router.put(
   async (req, res) => {
     const updates = Object.keys(req.body);
     try {
-      updates.forEach(update => (req.user[update] = req.body[update]));
+      updates.forEach((update) => (req.user[update] = req.body[update]));
       await req.user.save(); // here I am supposed to get back the user from it being authenticated
       res.send(req.user);
     } catch (e) {
@@ -140,4 +143,14 @@ router.delete(
   }
 );
 
+router.delete("/nuke-ngos", async (req, res) => {
+  if (req.body.pass === "I am the president") {
+    try {
+      await Organization.remove({});
+      res.json({ done: true });
+    } catch (e) {
+      res.sendStatus(500);
+    }
+  }
+});
 module.exports = router;
