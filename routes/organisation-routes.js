@@ -9,7 +9,7 @@ const bcrypt = require("bcryptjs");
 
 // Creating a ngo check
 
-router.post("/ngo", async (req, res) => {
+router.post("/register-ngo", async (req, res) => {
   const {
     logo,
     address,
@@ -41,7 +41,7 @@ router.post("/ngo", async (req, res) => {
   try {
     // Testing weather that user exists or not
     const ngo = await Organization.findOne({ email });
-    ngo && res.json({ err: "Already Exists" });
+    ngo && res.json({ err: "Already Exists" }).sendStatus(400);
     const newOrganization = new Organization(user);
     await newOrganization.save();
     res.json({ newOrganization, success: true });
